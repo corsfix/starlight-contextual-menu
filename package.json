@@ -1,0 +1,11 @@
+{
+  "name": "starlight-contextual-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --filter docs run dev"
+  },
+  "keywords": [],
+  "author": ""
+}
