@@ -9,10 +9,8 @@ function initContextualMenu(config = {}) {
     menuItems = [
       { label: "Edit this page", href: "#", icon: "edit" },
       { label: "View source", href: "#", icon: "code" },
-      { label: "Report issue", href: "#", icon: "bug" },
     ],
     triggerIcon = "M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z",
-    position = "title-right",
   } = config;
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -37,7 +35,7 @@ function initContextualMenu(config = {}) {
     // Create the contextual menu container
     const menuContainer = document.createElement("div");
     menuContainer.id = "contextual-menu-container";
-    menuContainer.className = `contextual-menu-container ${position}`;
+    menuContainer.className = `contextual-menu-container`;
 
     // Create main action button from first menu item
     let mainActionButton = null;
@@ -53,8 +51,7 @@ function initContextualMenu(config = {}) {
       }
 
       if (firstItem.icon) {
-        const iconSvg = getIconSvg(firstItem.icon);
-        mainActionButton.innerHTML = `${iconSvg}<span>${firstItem.label}</span>`;
+        mainActionButton.innerHTML = `${firstItem.icon}<span>${firstItem.label}</span>`;
       }
     }
 
@@ -94,8 +91,7 @@ function initContextualMenu(config = {}) {
       }
 
       if (item.icon) {
-        const iconSvg = getIconSvg(item.icon);
-        menuItem.innerHTML = `${iconSvg}<span>${item.label}</span>`;
+        menuItem.innerHTML = `${item.icon}<span>${item.label}</span>`;
       }
 
       dropdownMenu.appendChild(menuItem);
@@ -123,11 +119,6 @@ function initContextualMenu(config = {}) {
         display: inline-flex;
         align-items: center;
         margin-left: auto;
-      }
-      
-      .contextual-menu-container.title-left {
-        margin-left: 0;
-        margin-right: 1rem;
       }
       
       .contextual-main-action {
@@ -276,19 +267,6 @@ function initContextualMenu(config = {}) {
       }
     };
   });
-
-  // Helper function to get SVG icons
-  function getIconSvg(iconName) {
-    const icons = {
-      edit: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
-      code: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>`,
-      bug: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="14" x="8" y="6" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 12h-4"/><path d="M4 12h4"/><path d="m16 2-2 2"/><path d="m8 2 2 2"/></svg>`,
-      link: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
-      external: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
-    };
-
-    return icons[iconName] || icons.link;
-  }
 }
 
 export default initContextualMenu;
