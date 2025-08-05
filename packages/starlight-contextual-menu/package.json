@@ -1,6 +1,6 @@
 {
   "name": "starlight-contextual-menu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Add contextual menu to your Starlight documentation.",
   "license": "MIT",
   "main": "index.js",
