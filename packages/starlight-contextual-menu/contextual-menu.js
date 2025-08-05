@@ -78,10 +78,7 @@ function initContextualMenu(config) {
   const menuItems = createMenuItemsFromActions(config.actions);
 
   document.addEventListener("DOMContentLoaded", () => {
-    const titleElement =
-      document.querySelector("h1") ||
-      document.querySelector(".sl-markdown-content h1") ||
-      document.querySelector("[data-page-title]");
+    const titleElement = document.querySelector(".sl-container>h1");
 
     if (!titleElement) {
       console.warn("Contextual menu: Could not find page title element");
