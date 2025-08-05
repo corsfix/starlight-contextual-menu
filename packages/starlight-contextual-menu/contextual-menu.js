@@ -154,7 +154,6 @@ function initContextualMenu(config = {}) {
         text-decoration: none;
         font-size: 14px;
         line-height: 1.5;
-        transition: background-color 0.15s ease;
         gap: 8px;
         border-radius: 0.5rem;
       }
