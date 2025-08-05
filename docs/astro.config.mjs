@@ -17,7 +17,7 @@ export default defineConfig({
       ],
       plugins: [
         starlightContextualMenu({
-          actions: ["copy", "view"],
+          actions: ["copy", "view", "chatgpt", "claude"],
         }),
       ],
       sidebar: [
