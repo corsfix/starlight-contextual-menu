@@ -27,10 +27,36 @@ function initContextualMenu(config = {}) {
       return;
     }
 
+    // Get the parent element to inject the menu container
+    const parentElement = titleElement.parentElement;
+    if (!parentElement) {
+      console.warn("Contextual menu: Could not find parent element of title");
+      return;
+    }
+
     // Create the contextual menu container
     const menuContainer = document.createElement("div");
     menuContainer.id = "contextual-menu-container";
     menuContainer.className = `contextual-menu-container ${position}`;
+
+    // Create main action button from first menu item
+    let mainActionButton = null;
+    if (menuItems.length > 0) {
+      const firstItem = menuItems[0];
+      mainActionButton = document.createElement("a");
+      mainActionButton.href = firstItem.href;
+      mainActionButton.className = "contextual-main-action";
+      mainActionButton.textContent = firstItem.label;
+
+      if (firstItem.target) {
+        mainActionButton.target = firstItem.target;
+      }
+
+      if (firstItem.icon) {
+        const iconSvg = getIconSvg(firstItem.icon);
+        mainActionButton.innerHTML = `${iconSvg}<span>${firstItem.label}</span>`;
+      }
+    }
 
     // Create the trigger button
     const triggerButton = document.createElement("button");
@@ -76,20 +102,26 @@ function initContextualMenu(config = {}) {
     });
 
     // Assemble the menu
+    if (mainActionButton) {
+      menuContainer.appendChild(mainActionButton);
+    }
     menuContainer.appendChild(triggerButton);
     menuContainer.appendChild(dropdownMenu);
 
-    titleElement.style.display = "flex";
-    titleElement.style.alignItems = "center";
-    titleElement.style.justifyContent = "space-between";
-    titleElement.appendChild(menuContainer);
+    // Style the parent element to accommodate the menu
+    parentElement.style.display = "flex";
+    parentElement.style.justifyContent = "space-between";
+    parentElement.style.alignItems = "flex-start";
+    parentElement.classList.add("contextual-menu-parent");
+    parentElement.appendChild(menuContainer);
 
     // Add styles
     const style = document.createElement("style");
     style.textContent = `
       .contextual-menu-container {
         position: relative;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         margin-left: auto;
       }
       
@@ -98,21 +130,49 @@ function initContextualMenu(config = {}) {
         margin-right: 1rem;
       }
       
-      .contextual-menu-trigger {
+      .contextual-main-action {
         background: var(--sl-color-bg);
+        color: var(--sl-color-text);
         border: 1px solid var(--sl-color-gray-5);
-        border-radius: 0.5rem;
+        border-right: none;
+        border-radius: 0.5rem 0 0 0.5rem;
         padding: 8px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        height: 2rem;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      .contextual-main-action:hover {
+        background: var(--sl-color-hairline-light);
+      }
+      
+      .contextual-main-action svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      
+      .contextual-menu-trigger {
+        background: var(--sl-color-bg);
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
         color: var(--sl-color-text);
       }
       
       .contextual-menu-trigger:hover {
-        background: var(--sl-color-bg);
-        border-color: var(--sl-color-gray-2);
+        background: var(--sl-color-hairline-light);
       }
       
       .contextual-dropdown-menu {
@@ -160,19 +220,21 @@ function initContextualMenu(config = {}) {
         flex-shrink: 0;
       }
       
-      /* Mobile responsive */
-      @media (max-width: 768px) {
-        .contextual-dropdown-menu {
-          right: 0;
-          left: auto;
-          min-width: 160px;
+        /* Mobile responsive */
+        @media (max-width: 72rem) {
+          .contextual-menu-parent {
+            flex-direction: column;
+          }
+
+          .contextual-menu-container {
+            margin-left: 0;
+          }
+          
+          .contextual-dropdown-menu {
+            left: 0;
+            right: auto;
+          }
         }
-        
-        .contextual-menu-container.title-left .contextual-dropdown-menu {
-          left: 0;
-          right: auto;
-        }
-      }
     `;
     document.head.appendChild(style);
 
