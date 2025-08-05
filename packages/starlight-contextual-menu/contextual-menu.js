@@ -2,16 +2,9 @@
  * Creates and manages a contextual menu on the right side of the title
  * @param {Object} config - Configuration options
  * @param {Array} config.menuItems - Array of menu items {label, href, icon?, target?}
- * @param {string} config.triggerIcon - SVG path for the trigger button icon
  */
 function initContextualMenu(config = {}) {
-  const {
-    menuItems = [
-      { label: "Edit this page", href: "#", icon: "edit" },
-      { label: "View source", href: "#", icon: "code" },
-    ],
-    triggerIcon = "M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z",
-  } = config;
+  const { menuItems } = config;
 
   document.addEventListener("DOMContentLoaded", () => {
     // Find the page title element
@@ -70,7 +63,7 @@ function initContextualMenu(config = {}) {
            stroke-width="2" 
            stroke-linecap="round" 
            stroke-linejoin="round">
-        <path d="${triggerIcon}"/>
+        <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z"/>
       </svg>
     `;
 
