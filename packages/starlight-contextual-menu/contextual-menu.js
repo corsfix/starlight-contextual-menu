@@ -4,13 +4,16 @@ const DEFAULT_ACTIONS = {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-icon lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`,
     className: "copy-action",
     action: async () => {
-      /**
-       * The MIT License (MIT) Copyright (c) 2021 Cloudflare, Inc.
-       * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-       * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-       */
-      const markdownUrl = new URL("index.md", window.location.href).toString();
+      const markdownUrl = new URL(
+        "index.md",
+        window.location.href.replace(/\/?$/, "/")
+      ).toString();
       try {
+        /**
+         * The MIT License (MIT) Copyright (c) 2021 Cloudflare, Inc.
+         * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+         * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+         */
         const clipboardItem = new ClipboardItem({
           ["text/plain"]: fetch(markdownUrl)
             .then((r) => r.text())
@@ -43,7 +46,10 @@ const DEFAULT_ACTIONS = {
     label: "View as Markdown",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="208" height="128" viewBox="0 0 208 128"><rect width="198" height="118" x="5" y="5" ry="10" stroke="currentColor" stroke-width="10" fill="transparent"/><path stroke="currentColor" fill="currentColor" d="M30 98V30h20l20 25 20-25h20v68H90V59L70 84 50 59v39zm125 0l-30-33h20V30h20v35h20z"/></svg>`,
     action: () => {
-      window.open(new URL("index.md", window.location.href), "_blank");
+      window.open(
+        new URL("index.md", window.location.href.replace(/\/?$/, "/")),
+        "_blank"
+      );
     },
   },
   chatgpt: {
