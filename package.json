@@ -1,11 +1,9 @@
 {
-  "name": "starlight-contextual-menu",
+  "name": "starlight-contextual-menu-monorepo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Monorepo of starlight-contextual-menu plugin containing sample documentation and the plugin itself.",
   "scripts": {
     "dev": "pnpm --filter docs run dev"
   },
-  "keywords": [],
-  "author": ""
+  "author": "Corsfix"
 }

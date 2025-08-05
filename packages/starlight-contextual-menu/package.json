@@ -1,20 +1,16 @@
 {
   "name": "starlight-contextual-menu",
-  "version": "1.0.0",
-  "description": "A Starlight plugin that adds a contextual menu to the right side of page titles",
+  "version": "0.1.0",
+  "description": "Add contextual menu to your Starlight documentation.",
+  "license": "MIT",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "types": "index.d.ts",
   "keywords": [
-    "starlight",
     "astro",
-    "plugin",
-    "contextual-menu",
-    "navigation",
-    "documentation"
+    "starlight",
+    "contextual-menu"
   ],
-  "author": "",
+  "author": "Corsfix",
   "type": "module",
   "devDependencies": {
     "@astrojs/starlight": "^0.35.2"
@@ -22,9 +18,5 @@
   "peerDependencies": {
     "astro": "^5.0.0",
     "starlight-markdown": "^0.1.5"
-  },
-  "files": [
-    "index.js",
-    "contextual-menu.js"
-  ]
+  }
 }
