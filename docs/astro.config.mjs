@@ -15,7 +15,11 @@ export default defineConfig({
           href: "https://github.com/withastro/starlight",
         },
       ],
-      plugins: [starlightContextualMenu()],
+      plugins: [
+        starlightContextualMenu({
+          actions: ["copy", "view"],
+        }),
+      ],
       sidebar: [
         {
           label: "Guides",

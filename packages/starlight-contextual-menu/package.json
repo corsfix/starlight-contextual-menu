@@ -20,7 +20,8 @@
     "@astrojs/starlight": "^0.35.2"
   },
   "peerDependencies": {
-    "astro": "^5.0.0"
+    "astro": "^5.0.0",
+    "starlight-markdown": "^0.1.5"
   },
   "files": [
     "index.js",
