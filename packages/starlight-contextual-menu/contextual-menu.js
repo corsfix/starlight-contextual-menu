@@ -11,7 +11,7 @@ function initContextualMenu(config = {}) {
     menuItems = [
       { label: "Edit this page", href: "#", icon: "edit" },
       { label: "View source", href: "#", icon: "code" },
-      { label: "Report issue", href: "#", icon: "bug" }
+      { label: "Report issue", href: "#", icon: "bug" },
     ],
     triggerIcon = "M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z",
     position = "title-right",
@@ -20,8 +20,11 @@ function initContextualMenu(config = {}) {
 
   document.addEventListener("DOMContentLoaded", () => {
     // Find the page title element
-    const titleElement = document.querySelector("h1") || document.querySelector(".sl-markdown-content h1") || document.querySelector("[data-page-title]");
-    
+    const titleElement =
+      document.querySelector("h1") ||
+      document.querySelector(".sl-markdown-content h1") ||
+      document.querySelector("[data-page-title]");
+
     if (!titleElement) {
       console.warn("Contextual menu: Could not find page title element");
       return;
@@ -57,21 +60,21 @@ function initContextualMenu(config = {}) {
     dropdownMenu.className = "contextual-dropdown-menu";
 
     // Create menu items
-    menuItems.forEach(item => {
+    menuItems.forEach((item) => {
       const menuItem = document.createElement("a");
       menuItem.href = item.href;
       menuItem.className = "contextual-menu-item";
       menuItem.textContent = item.label;
-      
+
       if (item.target) {
         menuItem.target = item.target;
       }
-      
+
       if (item.icon) {
         const iconSvg = getIconSvg(item.icon);
         menuItem.innerHTML = `${iconSvg}<span>${item.label}</span>`;
       }
-      
+
       dropdownMenu.appendChild(menuItem);
     });
 
@@ -104,44 +107,37 @@ function initContextualMenu(config = {}) {
       }
       
       .contextual-menu-trigger {
-        background: var(--sl-color-bg-sidebar);
+        background: var(--sl-color-bg);
         border: 1px solid var(--sl-color-gray-5);
-        border-radius: 6px;
+        border-radius: 0.5rem;
         padding: 8px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--sl-color-text);
-        transition: background-color 0.2s ease, border-color 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       }
       
       .contextual-menu-trigger:hover {
-        background: var(--sl-color-gray-6);
-        border-color: var(--sl-color-gray-4);
-      }
-      
-      .contextual-menu-trigger:focus {
-        outline: 2px solid var(--sl-color-accent);
-        outline-offset: 2px;
+        background: var(--sl-color-bg);
+        border-color: var(--sl-color-gray-2);
       }
       
       .contextual-dropdown-menu {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 10px);
         right: 0;
-        background: var(--sl-color-white);
+        background: var(--sl-color-bg);
         border: 1px solid var(--sl-color-gray-5);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 0.5rem;
+        box-shadow: var(--sl-shadow-md);
         min-width: 180px;
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
-        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+        transition: opacity 0.15s ease, visibility 0.15s ease, transform 0.15s ease;
         z-index: 1000;
-        padding: 4px 0;
+        padding: 4px;
       }
       
       .contextual-dropdown-menu.show {
@@ -158,33 +154,19 @@ function initContextualMenu(config = {}) {
         text-decoration: none;
         font-size: 14px;
         line-height: 1.5;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.15s ease;
         gap: 8px;
+        border-radius: 0.5rem;
       }
       
       .contextual-menu-item:hover {
-        background: var(--sl-color-gray-7);
-        color: var(--sl-color-text);
+        background: var(--sl-color-hairline-light);
       }
       
       .contextual-menu-item svg {
         width: 16px;
         height: 16px;
         flex-shrink: 0;
-      }
-      
-      /* Dark theme support */
-      :root[data-theme="dark"] .contextual-dropdown-menu {
-        background: var(--sl-color-bg-nav);
-        border-color: var(--sl-color-gray-4);
-      }
-      
-      :root[data-theme="dark"] .contextual-menu-trigger {
-        background: var(--sl-color-bg-nav);
-      }
-      
-      :root[data-theme="dark"] .contextual-menu-trigger:hover {
-        background: var(--sl-color-gray-5);
       }
       
       /* Mobile responsive */
@@ -278,9 +260,9 @@ function initContextualMenu(config = {}) {
       code: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>`,
       bug: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="14" x="8" y="6" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 12h-4"/><path d="M4 12h4"/><path d="m16 2-2 2"/><path d="m8 2 2 2"/></svg>`,
       link: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
-      external: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`
+      external: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
     };
-    
+
     return icons[iconName] || icons.link;
   }
 }
