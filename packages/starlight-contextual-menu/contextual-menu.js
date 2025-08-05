@@ -3,8 +3,6 @@
  * @param {Object} config - Configuration options
  * @param {Array} config.menuItems - Array of menu items {label, href, icon?, target?}
  * @param {string} config.triggerIcon - SVG path for the trigger button icon
- * @param {string} config.position - Position of the menu ('title-right', 'title-left')
- * @param {boolean} config.showOnHover - Whether to show menu on hover or click
  */
 function initContextualMenu(config = {}) {
   const {
@@ -15,7 +13,6 @@ function initContextualMenu(config = {}) {
     ],
     triggerIcon = "M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z",
     position = "title-right",
-    showOnHover = false,
   } = config;
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -82,15 +79,10 @@ function initContextualMenu(config = {}) {
     menuContainer.appendChild(triggerButton);
     menuContainer.appendChild(dropdownMenu);
 
-    // Insert the menu next to the title
-    if (position === "title-right") {
-      titleElement.style.display = "flex";
-      titleElement.style.alignItems = "center";
-      titleElement.style.justifyContent = "space-between";
-      titleElement.appendChild(menuContainer);
-    } else {
-      titleElement.parentNode.insertBefore(menuContainer, titleElement);
-    }
+    titleElement.style.display = "flex";
+    titleElement.style.alignItems = "center";
+    titleElement.style.justifyContent = "space-between";
+    titleElement.appendChild(menuContainer);
 
     // Add styles
     const style = document.createElement("style");
@@ -200,44 +192,15 @@ function initContextualMenu(config = {}) {
       triggerButton.ariaExpanded = "false";
     };
 
-    // Event listeners based on showOnHover setting
-    if (showOnHover) {
-      menuContainer.addEventListener("mouseenter", () => {
-        isMenuOpen = true;
-        dropdownMenu.classList.add("show");
-        triggerButton.ariaExpanded = "true";
-      });
-
-      menuContainer.addEventListener("mouseleave", closeMenu);
-    } else {
-      triggerButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener("click", (e) => {
-        if (!menuContainer.contains(e.target)) {
-          closeMenu();
-        }
-      });
-    }
-
-    // Keyboard navigation
-    triggerButton.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleMenu();
-      } else if (e.key === "Escape") {
-        closeMenu();
-      }
+    triggerButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
 
-    // Handle escape key globally when menu is open
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isMenuOpen) {
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!menuContainer.contains(e.target)) {
         closeMenu();
-        triggerButton.focus();
       }
     });
 

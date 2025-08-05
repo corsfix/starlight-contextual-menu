@@ -17,7 +17,6 @@ export default defineConfig({
       ],
       plugins: [
         starlightContextualMenu({
-          // Contextual menu configuration
           menuItems: [
             {
               label: "Menu 1",
@@ -38,8 +37,6 @@ export default defineConfig({
               target: "_blank",
             },
           ],
-          position: "title-right",
-          showOnHover: false,
         }),
       ],
       sidebar: [
