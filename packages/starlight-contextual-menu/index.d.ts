@@ -5,6 +5,7 @@ type ContextualMenuActionType = "copy" | "view" | "claude" | "chatgpt" | "lechat
 export interface StarlightContextualMenuUserConfig {
   actions?: ContextualMenuActionType[];
   injectMarkdownRoutes?: boolean;
+  hideMainActionLabel?: boolean;
 }
 
 export default function starlightContextualMenu(

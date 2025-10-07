@@ -30,8 +30,6 @@ const DEFAULT_ACTIONS = {
         const textSpan = buttonElement.querySelector("span");
         if (textSpan) {
           textSpan.textContent = "Copied!";
-        } else {
-          buttonElement.textContent = "Copied!";
         }
 
         setTimeout(() => {
@@ -140,7 +138,6 @@ function initContextualMenu(config) {
       mainActionButton.className = `contextual-main-action ${
         firstItem.className || ""
       }`.trim();
-      mainActionButton.textContent = firstItem.label;
 
       mainActionButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -149,9 +146,16 @@ function initContextualMenu(config) {
         }
       });
 
+      let mainActionButtonHTML = "";
       if (firstItem.icon) {
-        mainActionButton.innerHTML = `${firstItem.icon}<span>${firstItem.label}</span>`;
+        mainActionButtonHTML += firstItem.icon;
       }
+
+      if (!config.hideMainActionLabel) {
+        mainActionButtonHTML += `<span>${firstItem.label}</span>`;
+      }
+
+      mainActionButton.innerHTML = mainActionButtonHTML;
     }
 
     const triggerButton = document.createElement("button");
