@@ -6,11 +6,14 @@ import { starlightMarkdownIntegration } from "starlight-markdown";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-function starlightContextualMenuIntegration(options) {
-  const config = {
-    actions: ["copy", "view"], // Default actions
-    ...options,
-  };
+const normalizeConfig = (options = {}) => ({
+  actions: ["copy", "view"],
+  injectMarkdownRoutes: true,
+  ...options,
+});
+
+function starlightContextualMenuIntegration(config) {
+  const normalizedConfig = normalizeConfig(config);
 
   return {
     name: "starlight-contextual-menu",
@@ -26,7 +29,7 @@ function starlightContextualMenuIntegration(options) {
           `
             ${contextualMenuContent};
             initContextualMenu(${JSON.stringify({
-              actions: config.actions,
+              actions: normalizedConfig.actions,
             })});          
           `
         );
@@ -36,12 +39,16 @@ function starlightContextualMenuIntegration(options) {
 }
 
 export default function starlightContextualMenu(userConfig) {
+  const config = normalizeConfig(userConfig);
+
   return {
     name: "starlight-contextual-menu-plugin",
     hooks: {
       "config:setup"({ addIntegration }) {
-        addIntegration(starlightMarkdownIntegration(userConfig));
-        addIntegration(starlightContextualMenuIntegration(userConfig));
+        if (config.injectMarkdownRoutes !== false) {
+          addIntegration(starlightMarkdownIntegration(config));
+        }
+        addIntegration(starlightContextualMenuIntegration(config));
       },
     },
   };

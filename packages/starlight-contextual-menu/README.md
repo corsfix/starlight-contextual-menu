@@ -43,6 +43,11 @@ There are 4 built in actions:
 - `chatgpt`: Open in ChatGPT
 - `claude`: Open in Claude
 
+### Options
+
+- `actions` (default: `['copy', 'view']`)
+- `injectMarkdownRoutes` (default: `true`) — set to `false` if another Starlight integration already adds the markdown routes to avoid duplicate route registration.
+
 By default, when not specifying actions, only `copy` and `view` will appear in the menu.
 
 ## License
