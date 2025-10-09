@@ -68,6 +68,22 @@ const DEFAULT_ACTIONS = {
       window.open(`https://claude.ai/new?q=${message}`, "_blank");
     },
   },
+  lechat: {
+    label: "Open in Le Chat",
+    icon: `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Mistral AI</title><path d="M17.143 3.429v3.428h-3.429v3.429h-3.428V6.857H6.857V3.43H3.43v13.714H0v3.428h10.286v-3.428H6.857v-3.429h3.429v3.429h3.429v-3.429h3.428v3.429h-3.428v3.428H24v-3.428h-3.43V3.429z"/></svg>`,
+    action: () => {
+      const message = `Read from ${window.location.href} so I can ask questions about it.`;
+      window.open(`https://chat.mistral.ai/chat?q=${message}`, "_blank");
+    },
+  },
+  grok: {
+    label: "Open in Grok",
+    icon: `<svg viewBox="0 0 1024 1024" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M395.479 633.828L735.91 381.105C752.599 368.715 776.454 373.548 784.406 392.792C826.26 494.285 807.561 616.253 724.288 699.996C641.016 783.739 525.151 802.104 419.247 760.277L303.556 814.143C469.49 928.202 670.987 899.995 796.901 773.282C896.776 672.843 927.708 535.937 898.785 412.476L899.047 412.739C857.105 231.37 909.358 158.874 1016.4 10.6326C1018.93 7.11771 1021.47 3.60279 1024 0L883.144 141.651V141.212L395.392 633.916"/><path d="M325.226 695.251C206.128 580.84 226.662 403.776 328.285 301.668C403.431 226.097 526.549 195.254 634.026 240.596L749.454 186.994C728.657 171.88 702.007 155.623 671.424 144.2C533.19 86.9942 367.693 115.465 255.323 228.382C147.234 337.081 113.244 504.215 171.613 646.833C215.216 753.423 143.739 828.818 71.7385 904.916C46.2237 931.893 20.6216 958.87 0 987.429L325.139 695.339"/></svg>`,
+    action: () => {
+      const message = `Read from ${window.location.href} so I can ask questions about it.`;
+      window.open(`https://grok.com/?q=${message}`, "_blank");
+    },
+  },
 };
 
 function createMenuItemsFromActions(actions) {
