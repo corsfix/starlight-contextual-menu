@@ -30,6 +30,7 @@ function starlightContextualMenuIntegration(config) {
             ${contextualMenuContent};
             initContextualMenu(${JSON.stringify({
               actions: normalizedConfig.actions,
+              hideMainActionLabel: config.hideMainActionLabel,
             })});          
           `
         );
