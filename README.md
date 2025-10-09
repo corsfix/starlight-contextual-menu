@@ -2,7 +2,7 @@
 
 Add contextual menu to your Starlight documentation.
 
-![starlight-contextual-menu](docs/public/banner.png)
+![starlight-contextual-menu](https://raw.githubusercontent.com/corsfix/starlight-contextual-menu/refs/heads/main/docs/public/banner.png)
 
 See it live on a real documentation page: [https://corsfix.com/docs/cors-proxy/api](https://corsfix.com/docs/cors-proxy/api)
 
@@ -42,6 +42,14 @@ There are 4 built in actions:
 - `view`: View as Markdown
 - `chatgpt`: Open in ChatGPT
 - `claude`: Open in Claude
+- `lechat`: Open in Mistral Le Chat
+- `grok`: Open in Grok
+
+### Options
+
+- `actions` (default: `['copy', 'view']`)
+- `injectMarkdownRoutes` (default: `true`) — set to `false` if another Starlight integration already adds the markdown routes to avoid duplicate route registration.
+- `hideMainActionLabel` (default: `false`) - set to `true` to hide the main action text and only show icon
 
 By default, when not specifying actions, only `copy` and `view` will appear in the menu.
 

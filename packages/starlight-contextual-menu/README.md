@@ -42,11 +42,14 @@ There are 4 built in actions:
 - `view`: View as Markdown
 - `chatgpt`: Open in ChatGPT
 - `claude`: Open in Claude
+- `lechat`: Open in Mistral Le Chat
+- `grok`: Open in Grok
 
 ### Options
 
 - `actions` (default: `['copy', 'view']`)
 - `injectMarkdownRoutes` (default: `true`) — set to `false` if another Starlight integration already adds the markdown routes to avoid duplicate route registration.
+- `hideMainActionLabel` (default: `false`) - set to `true` to hide the main action text and only show icon
 
 By default, when not specifying actions, only `copy` and `view` will appear in the menu.
 
